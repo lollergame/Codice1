@@ -27,25 +27,30 @@ int main() {
     for (int i = 0; i < B.getWidth(); i++)
         for (int j = 0; j < B.getHeight(); j++)
             std::cout << " B finale in posizione i " << i << " j " << j << " = " << B.getValue(i, j) << std::endl;
+
     cout <<endl<< "Istanzio C come A + B" << endl;
     ValoMatrix C = A.sum(B);
     C.printMatrix();
-    /*int w = C.getWidth();
-    int h = C.getHeight();
-    for (int i = 0; i < w; i++) {
-        for (int j = 0; j < h; j++) {
-            int cval = C.getValue(i, j);
-            std::cout << " C finale in posizione i " << i << " j " << j << " = " << C.getValue(i, j) << std::endl;
 
-        }
-    }
-*/
-    cout<<endl<<"Istanzio D come riga 2 di A "<<endl;
-    //int D[A.getWidth()] = A.allwidth(1); //chiedo la riga 1
-    //for (int i = 0; i < A.getWidth(); i++)
-        //for (int j = 0; j < D.getHeight(); j++)
-            //std::cout << " D finale in posizione i " << i << " j " << " = " << A.allwidth(i)<< std::endl;
-    //A.allwidth(1);
+    cout<<endl<<endl<<"Istanzio D come prima riga di C "<<endl;
+    ValoMatrix D(1,C.getWidth());
+    D.allWidth(C,0); // D=C.prendiriga(x);
+    D.printMatrix();
+
+    cout<<endl<<"Istanzio E come seconda riga di C "<<endl;
+    ValoMatrix E(1,C.getWidth());
+    E.allWidth(C,1);
+    E.printMatrix();
+
+    cout<<endl<< "Istanzio F come prima colonna di C"<<endl;
+    ValoMatrix F(C.getHeight(),1);
+    F.allHeight(C,0);
+    F.printMatrix();
+
+    cout<<endl<< "Istanzio G come seconda colonna di C"<<endl;
+    ValoMatrix G(C.getHeight(),1);
+    G.allHeight(C,1);
+    G.printMatrix();
 
     std::cout << "Hello, World!" << std::endl;
     return 0;

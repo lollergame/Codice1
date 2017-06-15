@@ -6,6 +6,7 @@
 #define EXAMDIPRO_VALOMATRIX_H
 
 #include "Matrix.h"
+//TODO unit testing urgente
 
 //template<typename T>
 class ValoMatrix : public Matrix {
@@ -17,27 +18,27 @@ public:
         value = new int[width * height];
         for (int i = 0; i < x; i++)
             for (int j = 0; j < width; j++)
-                value[i+j*height] = 0;
+                value[i + j * height] = 0;
     }
 
     ~ValoMatrix() {
         delete[] value;
     }
 
-    int getValue(int x, int y) {
+    int getValue(int x, int y) const {
         if ((x >= 0) && (x < width) && (y >= 0) && (y < height))
-            return value[x+y*height];
+            return value[x + y * height];
         else return 0;
     }
 
     bool setValue(int x, int y, int val) {
         if ((x >= 0) && (x < width) && (y >= 0) && (y < height)) {
-            value[x+y*height] = val;
+            value[x + y * height] = val;
             std::cout << "imposato valore " << val << " in x " << x << " y " << y << std::endl;
             return true;
         } else {
-         std::cout<<"inserimento non riuscito"<<std::endl;
-         return false;
+            std::cout << "inserimento non riuscito" << std::endl;
+            return false;
         }
     }
 
@@ -46,8 +47,8 @@ public:
             //ValoMatrix temp(this->width, this->height);
             for (int i = 0; i < width; i++)
                 for (int j = 0; j < height; j++) {
-                    int a = (this->getValue(i,j) + rh.getValue(i,j));
-                    this->setValue(i,j,a);
+                    int a = (this->getValue(i, j) + rh.getValue(i, j));
+                    this->setValue(i, j, a);
                 }
             return *this;
         } else {
@@ -57,31 +58,50 @@ public:
     }
 
     void printMatrix() {
-        for (int i = 0; i < width; i++)
+        for (int i = 0; i < width; i++) {
+            std::cout << std::endl;
             for (int j = 0; j < height; j++) {
-                std::cout << "posizione i " << i << " j " << j << " valore " << this->getValue(i, j) << std::endl;
+                std::cout << this->getValue(i, j);
+                if (j <= i)
+                    std::cout << " ";
+                else if (j >= i)
+                    std::cout << std::endl;
             }
+        }
+        std::cout << std::endl << std::endl;
+
     }
 
-    int allwidth(int x) {
-        if (x >= 0 && x < this->width) {
-            //ValoMatrix temp(this->width,1);
-            int tempo[this->width];
-            for (int i = 0; i < this->width; i++) {
-                int a = this->getValue(i,0);
-                //temp.setValue(i,0,a);
-                tempo[i] = a;
-                std::cout<<tempo[i]<<std::endl;
+    ValoMatrix &allWidth(const ValoMatrix &M, int x) {
+        if (x >= 0 && x < M.getWidth()) {
+            for (int i = 0; i < M.getWidth(); i++) {
+                this->setValue(0, i, M.getValue(x, i));
             }
-            return *tempo;
+            return *this;
         }
+    }
+
+    ValoMatrix &allHeight(const ValoMatrix &M, int y) {
+        if (y >= 0 && y < M.getHeight()) {
+            for (int i = 0; i < M.getHeight(); i++) {
+                this->setValue(i, 0, M.getValue(i, y));
+            }
+            return *this;
+        }
+    }
+
+    ValoMatrix prodWxH(const ValoMatrix &first, const ValoMatrix &second) { //da completare~
+        if (this->width == first.width && this->height == second.height)
+            for (int i = 0; i < first.width; i++) {
+                for (int j = 0; j < second.height; j++) {
+                    this->value[i + j * height] = (first.value[i + j * height] + second.value[j + i * width]);
+                }
+            }
     }
 
     ValoMatrix prod(ValoMatrix &rh) {
         if (this->height == rh.width) {     //Controllo se le matrici sono conformabili
-            //T C[this->width * rh.height];
             ValoMatrix G(width, rh.height);
-            //ValoMatrix* temp0 = new ValoMatrix(this->width, rh.height);
             for (int i = 0; i < this->width; i++) {
                 for (int j = 0; j < rh.height; j++) {
                     for (int k = 0; k < this->width; k++) {
@@ -94,25 +114,24 @@ public:
         } else return rh;
     }
 
-    ValoMatrix& operator=(ValoMatrix &rh) {
+    ValoMatrix &operator=(const ValoMatrix &rh) {
+        //TODO evitare autoassegnazione
         this->width = rh.width;
         this->height = rh.height;
-        if(this->value)
+        if (this->value)
             delete[] value;
-        for (int i = 0; i < this->width; i++) {
+        for (int i = 0; i < this->width; i++)
             for (int j = 0; j < this->height; j++) {
-                this->setValue(i,j,rh.value[i+j*height]);
+                this->setValue(i, j, rh.value[i + j * height]);
             }
-        }
-
         return *this;
     }
 
-    int getWidth() {
+    int getWidth() const {
         return width;
     }
 
-    int getHeight() {
+    int getHeight() const {
         return height;
     }
 

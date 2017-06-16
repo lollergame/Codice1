@@ -42,21 +42,6 @@ public:
         }
     }
 
-    ValoMatrix sum(ValoMatrix &rh) {
-        if ((this->width == rh.width) && (this->height == rh.height)) {
-            //ValoMatrix temp(this->width, this->height);
-            for (int i = 0; i < width; i++)
-                for (int j = 0; j < height; j++) {
-                    int a = (this->getValue(i, j) + rh.getValue(i, j));
-                    this->setValue(i, j, a);
-                }
-            return *this;
-        } else {
-            ValoMatrix zero(1, 1);
-            return zero;
-        }
-    }
-
     void printMatrix() {
         for (int i = 0; i < width; i++) {
             std::cout << std::endl;
@@ -100,8 +85,6 @@ public:
                 for (int j = 0; j < rh.height; j++) {
                     int tempor = 0;
                     for (int k = 0; k < this->height; k++) {
-                        //int val1 = this->getValue(i, k);
-                        //int val2 = rh.getValue(k, j);
                         tempor += this->getValue(i, k) * rh.getValue(k, j);
                         temp.setValue(i, j, tempor);
                     }

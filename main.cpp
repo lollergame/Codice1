@@ -8,25 +8,21 @@ int main() {
 
     cout<<"Istanzio A come 2x2"<<endl;
     ValoMatrix A(2, 2);
-    int dieci = 10;
-    int cinque = 5;
+    int tre = 3;
+    int quattro = 4;
     A.setValue(0, 0, 1);
     A.setValue(0, 1, 2);
-    A.setValue(1, 0, cinque);
-    A.setValue(1, 1, dieci);
-    for (int i = 0; i < A.getWidth(); i++)
-        for (int j = 0; j < A.getHeight(); j++)
-            std::cout << " A finale in posizione i " << i << " j " << j << " = " << A.getValue(i, j) << std::endl;
+    A.setValue(1, 0, tre);
+    A.setValue(1, 1, quattro);
+    A.printMatrix();
 
     cout<<endl<<"Istanzio B come 2x2" << endl;
     ValoMatrix B(2, 2);
-    B.setValue(0, 0, 100);
-    B.setValue(0, 1, 50);
-    B.setValue(1, 0, 500);
-    B.setValue(1, 1, 1000);
-    for (int i = 0; i < B.getWidth(); i++)
-        for (int j = 0; j < B.getHeight(); j++)
-            std::cout << " B finale in posizione i " << i << " j " << j << " = " << B.getValue(i, j) << std::endl;
+    B.setValue(0, 0, 5);
+    B.setValue(0, 1, 6);
+    B.setValue(1, 0, 7);
+    B.setValue(1, 1, 8);
+    B.printMatrix();
 
     cout <<endl<< "Istanzio C come A + B" << endl;
     ValoMatrix C = A.sum(B);
@@ -51,6 +47,11 @@ int main() {
     ValoMatrix G(C.getHeight(),1);
     G = C.prendiColonna(1);
     G.printMatrix();
+
+    cout << "istanzio H come prodotto tra A e B" << endl;
+    ValoMatrix H(A.getWidth(), B.getHeight());
+    H = A.prod(B);
+    H.printMatrix();
 
     std::cout << "Hello, World!" << std::endl;
     return 0;

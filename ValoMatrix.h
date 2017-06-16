@@ -93,29 +93,37 @@ public:
         } else return temp;
     }
 
-    ValoMatrix prodWxH(const ValoMatrix &first, const ValoMatrix &second) { //da completare~
-        if (this->width == first.width && this->height == second.height)
-            for (int i = 0; i < first.width; i++) {
-                for (int j = 0; j < second.height; j++) {
-                    this->value[i + j * height] = (first.value[i + j * height] + second.value[j + i * width]);
-                }
-            }
-    }
-
     ValoMatrix prod(ValoMatrix &rh) {
-        if (this->height == rh.width) {     //Controllo se le matrici sono conformabili
-            ValoMatrix G(width, rh.height);
+        ValoMatrix temp(width, rh.height);
+        if (this->height == rh.width) {
             for (int i = 0; i < this->width; i++) {
                 for (int j = 0; j < rh.height; j++) {
-                    for (int k = 0; k < this->width; k++) {
-                        int op = (this->getValue(i, k)) * (rh.getValue(k, j));
-                        G.setValue(i, j, op);
+                    int tempor = 0;
+                    for (int k = 0; k < this->height; k++) {
+                        int val1 = this->getValue(i, k);
+                        int val2 = rh.getValue(k, j);
+                        tempor += this->getValue(i, k) * rh.getValue(k, j);
+                        temp.setValue(i, j, tempor);
                     }
                 }
             }
-            return G;
-        } else return rh;
+            return temp;
+        }
+        return temp;
     }
+
+    /**   if (this->height == rh.width) {     //Controllo se le matrici sono conformabili
+
+                   for (int k = 0; k < this->width; k++) {
+                       int op = (this->getValue(i, k)) * (rh.getValue(k, j));
+                       G.setValue(i, j, op);
+                   }
+               }
+           }
+           return G;
+       } else return rh;
+   }
+   */
 
     ValoMatrix &operator=(const ValoMatrix &rh) {
         if (this != &rh) {

@@ -72,22 +72,25 @@ public:
 
     }
 
-    ValoMatrix &allWidth(const ValoMatrix &M, int x) {
-        if (x >= 0 && x < M.getWidth()) {
-            for (int i = 0; i < M.getWidth(); i++) {
-                this->setValue(0, i, M.getValue(x, i));
+    ValoMatrix prendiRiga(const int x) {
+        ValoMatrix temp(1, this->width);
+        if (x >= 0 && x < this->width) {
+            for (int i = 0; i < this->width; i++) {
+                //int a = this->getValue(x,i);
+                temp.setValue(0, i, this->getValue(x, i));
             }
-            return *this;
-        }
+            return temp;
+        } else return temp;
     }
 
-    ValoMatrix &allHeight(const ValoMatrix &M, int y) {
-        if (y >= 0 && y < M.getHeight()) {
-            for (int i = 0; i < M.getHeight(); i++) {
-                this->setValue(i, 0, M.getValue(i, y));
+    ValoMatrix prendiColonna(int y) {
+        ValoMatrix temp(this->height, 1);
+        if (y >= 0 && y < this->height) {
+            for (int i = 0; i < this->height; i++) {
+                temp.setValue(i, 0, this->getValue(i, y));
             }
-            return *this;
-        }
+            return temp;
+        } else return temp;
     }
 
     ValoMatrix prodWxH(const ValoMatrix &first, const ValoMatrix &second) { //da completare~
@@ -115,16 +118,17 @@ public:
     }
 
     ValoMatrix &operator=(const ValoMatrix &rh) {
-        //TODO evitare autoassegnazione
-        this->width = rh.width;
-        this->height = rh.height;
-        if (this->value)
-            delete[] value;
-        for (int i = 0; i < this->width; i++)
-            for (int j = 0; j < this->height; j++) {
-                this->setValue(i, j, rh.value[i + j * height]);
-            }
-        return *this;
+        if (this != &rh) {
+            this->width = rh.width;
+            this->height = rh.height;
+            if (this->value)
+                delete[] value;
+            for (int i = 0; i < this->width; i++)
+                for (int j = 0; j < this->height; j++) {
+                    this->setValue(i, j, rh.value[i + j * height]);
+                }
+            return *this;
+        } else return *this;
     }
 
     int getWidth() const {

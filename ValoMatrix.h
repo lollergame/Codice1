@@ -100,8 +100,8 @@ public:
                 for (int j = 0; j < rh.height; j++) {
                     int tempor = 0;
                     for (int k = 0; k < this->height; k++) {
-                        int val1 = this->getValue(i, k);
-                        int val2 = rh.getValue(k, j);
+                        //int val1 = this->getValue(i, k);
+                        //int val2 = rh.getValue(k, j);
                         tempor += this->getValue(i, k) * rh.getValue(k, j);
                         temp.setValue(i, j, tempor);
                     }
@@ -112,31 +112,42 @@ public:
         return temp;
     }
 
-    /**   if (this->height == rh.width) {     //Controllo se le matrici sono conformabili
+    ValoMatrix operator+(const ValoMatrix &rh) {
+        ValoMatrix temp(rh.width, rh.height);
+        if ((this->width == rh.width) && (this->height == rh.height)) {
+            for (int i = 0; i < this->width; i++)
+                for (int j = 0; j < this->height; j++) {
+                    int tempor = this->getValue(i, j) + rh.getValue(i, j);
+                    temp.setValue(i, j, tempor);
+                }
+            return temp;
+        } else return temp;
+    }
 
-                   for (int k = 0; k < this->width; k++) {
-                       int op = (this->getValue(i, k)) * (rh.getValue(k, j));
-                       G.setValue(i, j, op);
-                   }
-               }
-           }
-           return G;
-       } else return rh;
-   }
-   */
-
-    ValoMatrix &operator=(const ValoMatrix &rh) {
+    ValoMatrix operator=(const ValoMatrix &rh) const {
+        ValoMatrix temp(rh.getWidth(), rh.getHeight());
         if (this != &rh) {
-            this->width = rh.width;
+            /*this->width = rh.width;
             this->height = rh.height;
             if (this->value)
                 delete[] value;
             for (int i = 0; i < this->width; i++)
                 for (int j = 0; j < this->height; j++) {
-                    this->setValue(i, j, rh.value[i + j * height]);
+                    this->setValue(i, j, rh.getValue(i,j));
                 }
             return *this;
-        } else return *this;
+        } else return *this;*/
+            //E' una valida alternativa...
+            temp.width = rh.width;
+            temp.height = rh.height;
+            if (this->value)
+                delete[] value;
+            for (int i = 0; i < temp.width; i++)
+                for (int j = 0; j < temp.height; j++) {
+                    temp.setValue(i, j, rh.getValue(i, j));
+                }
+            return temp;
+        } else return temp;
     }
 
     int getWidth() const {

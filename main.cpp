@@ -25,32 +25,30 @@ int main() {
     B.printMatrix();
 
     cout <<endl<< "Istanzio C come A + B" << endl;
-    ValoMatrix C = A.sum(B);
+    ValoMatrix C = A + B;
     C.printMatrix();
 
     cout<<endl<<endl<<"Istanzio D come prima riga di C "<<endl;
-    ValoMatrix D(1,C.getWidth());
-    D = C.prendiRiga(0); //D.allWidth(C,0);
+    ValoMatrix D = C.prendiRiga(0);
     D.printMatrix();
 
     cout<<endl<<"Istanzio E come seconda riga di C "<<endl;
-    ValoMatrix E(1,C.getWidth());
-    E = C.prendiRiga(1);
+    ValoMatrix E = C.prendiRiga(1);
     E.printMatrix();
 
     cout<<endl<< "Istanzio F come prima colonna di C"<<endl;
-    ValoMatrix F(C.getHeight(),1);
-    F = C.prendiColonna(0);
+    ValoMatrix F = C.prendiColonna(0);
     F.printMatrix();
 
     cout<<endl<< "Istanzio G come seconda colonna di C"<<endl;
-    ValoMatrix G(C.getHeight(),1);
-    G = C.prendiColonna(1);
+    ValoMatrix G = C.prendiColonna(1);
     G.printMatrix();
 
+    cout << "Riecco A" << endl;
+    A.printMatrix();
+
     cout << "istanzio H come prodotto tra A e B" << endl;
-    ValoMatrix H(A.getWidth(), B.getHeight());
-    H = A.prod(B);
+    ValoMatrix H = A.prod(B);
     H.printMatrix();
 
     std::cout << "Hello, World!" << std::endl;

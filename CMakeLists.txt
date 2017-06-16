@@ -3,5 +3,5 @@ project(ExamDiPro)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Matriciosamente.h Matrix.h ValoMatrix.h ObjoMatrix.h)
+set(SOURCE_FILES main.cpp Matriciosamente.h Matrix.h ValoMatrix.h)
 add_executable(ExamDiPro ${SOURCE_FILES})

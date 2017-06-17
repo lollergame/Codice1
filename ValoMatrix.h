@@ -15,13 +15,13 @@ template<typename T>
 class ValoMatrix : public Matrix {
 public:
 
-    ValoMatrix(const int x, const int y) {
+    ValoMatrix(int x, int y) {
         width = x;
         height = y;
         value = new T[width * height];
-        for (int i = 0; i < x; i++)
-            for (int j = 0; j < width; j++)
-                value[i + j * height] = 0;
+        for (int i = 0; i < width; i++)
+            for (int j = 0; j < height; j++)
+                value[i + j * width] = 0;
     }
 
     virtual ~ValoMatrix() {
@@ -30,15 +30,16 @@ public:
 
     T const getValue(const int x, const int y) const throw(std::out_of_range) {
         if ((x >= 0) && (x < width) && (y >= 0) && (y < height))
-            return value[x + y * height];
+            return value[x + y * width];
         else
             throw (std::out_of_range(
                     "Out Of Range per la selezione degli indici di riga e/o di colonna, La Matrice ha dimensioni diverse"));
     }
 
-    void setValue(const int x, const int y, const T val) throw(std::out_of_range) {
-        if ((x >= 0) && (x < width) && (y >= 0) && (y < height)) {
-            value[x + y * height] = val;
+    void setValue(const int x, const int y, const int val) throw(std::out_of_range) {
+        if ((x >= 0) && (y >= 0) && (x < width) && (y < height)) {
+            value[x + y * width] = val;
+            std::cout << "posizione x " << x << " y " << y << " valore " << val << std::endl;
         } else
             throw (std::out_of_range(
                     "Out Of Range per la selezione degli indici di riga e/o di colonna, la Matrice ha dimensioni diverse"));
@@ -46,16 +47,10 @@ public:
 
     void printMatrix() const {
         for (int i = 0; i < width; i++) {
-            std::cout << std::endl;
-            for (int j = 0; j < height; j++) {
-                std::cout << this->getValue(i, j);
-                if (j <= i)
-                    std::cout << " ";
-                else if (j >= i)
-                    std::cout << std::endl;
-            }
+            for (int j = 0; j < height; j++)
+                std::cout << this->getValue(i, j) << "\t";
+            std::cout << std::endl << std::endl;
         }
-        std::cout << std::endl << std::endl;
     }
 
     ValoMatrix prendiRiga(const int x) const throw(std::out_of_range) {
@@ -82,7 +77,7 @@ public:
         if (this->value) {
             for (int i = 0; i < this->width; i++)
                 for (int j = i; j < this->height; j++) {
-                    T tempor = this->getValue(i, j);
+                    int tempor = this->getValue(i, j);
                     this->setValue(i, j, this->getValue(j, i));
                     this->setValue(j, i, tempor);
                 }
@@ -92,7 +87,7 @@ public:
 
     ValoMatrix &underScale(const int x, const int y) throw(std::out_of_range) {
         if ((this->width > 1) && (this->height > 1)) {
-            if (x < this->width && y < this->height) {
+            if (x <= this->width && y <= this->height) {
                 this->width = x;
                 this->height = y;
                 for (int i = x; i < this->width; ++i)
@@ -141,8 +136,8 @@ public:
             for (int i = 0; i < this->width; i++)
                 for (int j = 0; j < this->height; j++)
                     this->setValue(i, j, rh.getValue(i, j));
-            return *this;
-        } else return *this;
+        }
+        return *this;
     }
 
     int getWidth() const {
@@ -152,7 +147,6 @@ public:
     int getHeight() const {
         return height;
     }
-
 private:
     int *value;
 };

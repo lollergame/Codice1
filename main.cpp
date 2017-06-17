@@ -1,13 +1,14 @@
 #include <iostream>
+
 #include "ValoMatrix.h"
-//#include "SimpleMatrix.h"
+
 
 using namespace std;
 
 int main() {
     try {
         cout << "Istanzio A come 2x2" << endl;
-        ValoMatrix<int> A(2, 2);
+        ValoMatrix<int> A(4, 4);
         int tre = 3;
         int quattro = 4;
         A.setValue(0, 0, 1);
@@ -17,7 +18,7 @@ int main() {
         A.printMatrix();
 
         cout << endl << "Istanzio B come 2x2" << endl;
-        ValoMatrix<int> B(2, 2);
+        ValoMatrix<int> B(4, 4);
         B.setValue(0, 0, 5);
         B.setValue(0, 1, 6);
         B.setValue(1, 0, 7);
@@ -49,10 +50,14 @@ int main() {
         ValoMatrix<int> H = A * B;
         H.printMatrix();
 
+        cout << "A" << endl;
+        A.printMatrix();
+
         cout << "Istanzio I come copia di A e traspongo" << endl;
-        ValoMatrix<int> I(2, 2);
+        ValoMatrix<int> I(4, 4);
         cout << "Copio A in I" << endl;
         I = A;
+        I.printMatrix();
         cout << "Traspongo I" << endl;
         I.trasp();
         cout << "Printo I" << endl;
@@ -65,7 +70,7 @@ int main() {
         A.printMatrix();
 
         cout << "Orlata 1x1 di A" << endl;
-        A.underScale(1, 1);
+        A.underScale(5, 5);
         A.printMatrix();
 
         cout << "Orlata 10x10 di A" << endl;
@@ -75,5 +80,8 @@ int main() {
         std::cout << "Hello, World!" << std::endl;
         return 0;
     }
-    catch (std::out_of_range &e) { cerr << e.what() << endl; }
+    catch (std::out_of_range &e) {
+        cerr << e.what() << endl;
+        return 42;
+    }
 }

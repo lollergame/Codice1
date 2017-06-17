@@ -78,19 +78,20 @@ public:
     }
 
     ValoMatrix &trasp() {
-        //ValoMatrix temp(this->width,this->height);
+        ValoMatrix *temp = new ValoMatrix(this->width, this->height);
+        temp = this;
         if (this->value) {
             for (int i = 0; i < this->width; i++)
                 for (int j = i; j < this->height; j++) {
-                    int tempor = this->getValue(i, j);
-                    this->setValue(i, j, this->getValue(j, i));
-                    this->setValue(j, i, tempor);
+                    int tempor = temp->getValue(i, j);
+                    temp->setValue(i, j, temp->getValue(j, i));
+                    temp->setValue(j, i, tempor);
 
                 }
-            return *this;
+            return *temp;
         } else {
-            ValoMatrix zero(1, 1);
-            return zero;
+            ValoMatrix *zero = new ValoMatrix(1, 1);
+            return *zero;
         };
         //else throw
     }

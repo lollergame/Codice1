@@ -41,22 +41,27 @@ int main() {
     F.printMatrix();
 
     cout<<endl<< "Istanzio G come seconda colonna di C"<<endl;
-    ValoMatrix G = C.prendiColonna(1);
+    ValoMatrix G(C.getWidth(), C.getHeight());
+    G = C.prendiColonna(1);
     G.printMatrix();
-
-    cout << "Riecco A" << endl;
-    A.printMatrix();
 
     cout << "Istanzio H come prodotto tra A e B" << endl;
     ValoMatrix H = A * B;
     H.printMatrix();
 
     cout << "Istanzio I come copia di A e traspongo" << endl;
-    ValoMatrix I = A;
+    ValoMatrix I(2, 2);
+    cout << "Copio A in I" << endl;
+    I = A;
+    cout << "Traspongo I" << endl;
     I.trasp();
+    cout << "Printo I" << endl;
     I.printMatrix();
 
     cout << "A" << endl;
+    A.printMatrix();
+    cout << "traspongo A" << endl;
+    A.trasp();
     A.printMatrix();
     std::cout << "Hello, World!" << std::endl;
     return 0;

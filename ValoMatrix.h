@@ -78,21 +78,19 @@ public:
     }
 
     ValoMatrix &trasp() {
-        ValoMatrix *temp = new ValoMatrix(this->width, this->height);
-        temp = this;
+        //ValoMatrix temp(this->width,this->height);
         if (this->value) {
             for (int i = 0; i < this->width; i++)
                 for (int j = i; j < this->height; j++) {
-                    int tempor = temp->getValue(i, j);
-                    temp->setValue(i, j, temp->getValue(j, i));
-                    temp->setValue(j, i, tempor);
-
+                    int tempor = this->getValue(i, j);
+                    this->setValue(i, j, this->getValue(j, i));
+                    this->setValue(j, i, tempor);
                 }
-            return *temp;
+            return *this;
         } else {
             ValoMatrix *zero = new ValoMatrix(1, 1);
             return *zero;
-        };
+        }
         //else throw
     }
 
@@ -124,19 +122,22 @@ public:
         } else return temp;
     }
 
-    ValoMatrix operator=(const ValoMatrix &rh) const {
-        ValoMatrix temp(rh.getWidth(), rh.getHeight());
+    ValoMatrix &operator=(const ValoMatrix &rh) {
+        //ValoMatrix* temp = new ValoMatrix(rh.getWidth(), rh.getHeight());
         if (this != &rh) {
-            temp.width = rh.width;
-            temp.height = rh.height;
-            if (this->value)
-                delete[] value;
-            for (int i = 0; i < temp.width; i++)
-                for (int j = 0; j < temp.height; j++) {
-                    temp.setValue(i, j, rh.getValue(i, j));
+            this->width = rh.width;
+            this->height = rh.height;
+            //if (this->value)
+            //  delete[] value;
+            for (int i = 0; i < this->width; i++)
+                for (int j = 0; j < this->height; j++) {
+                    this->setValue(i, j, rh.getValue(i, j));
                 }
-            return temp;
-        } else return temp;
+            return *this;
+        } else {
+            ValoMatrix *zero = new ValoMatrix(1, 1);
+            return *zero;
+        }
     }
 
     int getWidth() const {

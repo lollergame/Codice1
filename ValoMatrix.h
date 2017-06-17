@@ -6,6 +6,7 @@
 #define EXAMDIPRO_VALOMATRIX_H
 
 #include <stdexcept>
+
 #include "Matrix.h"
 
 //TODO unit testing urgente
@@ -90,7 +91,7 @@ public:
     }
 
     ValoMatrix &underScale(const int x, const int y) throw(std::out_of_range) {
-        if ((this->width > 1) && (this->width > 1)) {
+        if ((this->width > 1) && (this->height > 1)) {
             if (x < this->width && y < this->height) {
                 this->width = x;
                 this->height = y;

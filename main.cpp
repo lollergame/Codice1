@@ -47,10 +47,16 @@ int main() {
     cout << "Riecco A" << endl;
     A.printMatrix();
 
-    cout << "istanzio H come prodotto tra A e B" << endl;
-    ValoMatrix H = A.prod(B);
+    cout << "Istanzio H come prodotto tra A e B" << endl;
+    ValoMatrix H = A * B;
     H.printMatrix();
 
+    cout << "Istanzio I come trasposta di A" << endl;
+    ValoMatrix I = A.trasp();
+    I.printMatrix();
+
+    cout << "A" << endl;
+    A.printMatrix();
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }

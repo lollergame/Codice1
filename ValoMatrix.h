@@ -25,7 +25,7 @@ public:
         delete[] value;
     }
 
-    int getValue(const int x, const int y) const {
+    int const getValue(const int x, const int y) const {
         if ((x >= 0) && (x < width) && (y >= 0) && (y < height))
             return value[x + y * height];
         else return 0;
@@ -61,7 +61,6 @@ public:
         ValoMatrix temp(1, this->width);
         if (x >= 0 && x < this->width) {
             for (int i = 0; i < this->width; i++) {
-                //int a = this->getValue(x,i);
                 temp.setValue(0, i, this->getValue(x, i));
             }
             return temp;
@@ -78,8 +77,26 @@ public:
         } else return temp;
     }
 
-    ValoMatrix prod(const ValoMatrix &rh) {
-        ValoMatrix temp(width, rh.height);
+    ValoMatrix &trasp() {
+        //ValoMatrix temp(this->width,this->height);
+        if (this->value) {
+            for (int i = 0; i < this->width; i++)
+                for (int j = i; j < this->height; j++) {
+                    int tempor = this->getValue(i, j);
+                    this->setValue(i, j, this->getValue(j, i));
+                    this->setValue(j, i, tempor);
+
+                }
+            return *this;
+        } else {
+            ValoMatrix zero(1, 1);
+            return zero;
+        };
+        //else throw
+    }
+
+    ValoMatrix operator*(const ValoMatrix &rh) {
+        ValoMatrix temp(this->width, rh.height);
         if (this->height == rh.width) {
             for (int i = 0; i < this->width; i++) {
                 for (int j = 0; j < rh.height; j++) {
@@ -100,8 +117,7 @@ public:
         if ((this->width == rh.width) && (this->height == rh.height)) {
             for (int i = 0; i < this->width; i++)
                 for (int j = 0; j < this->height; j++) {
-                    int tempor = this->getValue(i, j) + rh.getValue(i, j);
-                    temp.setValue(i, j, tempor);
+                    temp.setValue(i, j, (this->getValue(i, j) + rh.getValue(i, j)));
                 }
             return temp;
         } else return temp;

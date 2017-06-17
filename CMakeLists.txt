@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.7)
 project(ExamDiPro)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp Matriciosamente.h Matrix.h ValoMatrix.h)
-add_executable(ExamDiPro ${SOURCE_FILES})
+add_subdirectory(test)
+
+set(SOURCE_FILES main.cpp Matrix.h ValoMatrix.h)
+add_executable(ExamDiPro main.cpp)
+add_library(core ${SOURCE_FILES})
+target_link_libraries(ExamDiPro core)

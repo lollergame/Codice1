@@ -51,8 +51,9 @@ int main() {
     ValoMatrix H = A * B;
     H.printMatrix();
 
-    cout << "Istanzio I come trasposta di A" << endl;
-    ValoMatrix I = A.trasp();
+    cout << "Istanzio I come copia di A e traspongo" << endl;
+    ValoMatrix I = A;
+    I.trasp();
     I.printMatrix();
 
     cout << "A" << endl;

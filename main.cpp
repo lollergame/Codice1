@@ -7,7 +7,7 @@ using namespace std;
 int main() {
     try {
         cout << "Istanzio A come 2x2" << endl;
-        ValoMatrix A(2, 2);
+        ValoMatrix<int> A(2, 2);
         int tre = 3;
         int quattro = 4;
         A.setValue(0, 0, 1);
@@ -17,7 +17,7 @@ int main() {
         A.printMatrix();
 
         cout << endl << "Istanzio B come 2x2" << endl;
-        ValoMatrix B(2, 2);
+        ValoMatrix<int> B(2, 2);
         B.setValue(0, 0, 5);
         B.setValue(0, 1, 6);
         B.setValue(1, 0, 7);
@@ -25,32 +25,32 @@ int main() {
         B.printMatrix();
 
         cout << endl << "Istanzio C come A + B" << endl;
-        ValoMatrix C = A + B;
+        ValoMatrix<int> C = A + B;
         C.printMatrix();
 
         cout << endl << endl << "Istanzio D come prima riga di C " << endl;
-        ValoMatrix D = C.prendiRiga(0);
+        ValoMatrix<int> D = C.prendiRiga(0);
         D.printMatrix();
 
         cout << endl << "Istanzio E come seconda riga di C " << endl;
-        ValoMatrix E = C.prendiRiga(1);
+        ValoMatrix<int> E = C.prendiRiga(1);
         E.printMatrix();
 
         cout << endl << "Istanzio F come prima colonna di C" << endl;
-        ValoMatrix F = C.prendiColonna(0);
+        ValoMatrix<int> F = C.prendiColonna(0);
         F.printMatrix();
 
         cout << endl << "Istanzio G come seconda colonna di C" << endl;
-        ValoMatrix G(C.getWidth(), C.getHeight());
+        ValoMatrix<int> G(C.getWidth(), C.getHeight());
         G = C.prendiColonna(1);
         G.printMatrix();
 
         cout << "Istanzio H come prodotto tra A e B" << endl;
-        ValoMatrix H = A * B;
+        ValoMatrix<int> H = A * B;
         H.printMatrix();
 
         cout << "Istanzio I come copia di A e traspongo" << endl;
-        ValoMatrix I(2, 2);
+        ValoMatrix<int> I(2, 2);
         cout << "Copio A in I" << endl;
         I = A;
         cout << "Traspongo I" << endl;

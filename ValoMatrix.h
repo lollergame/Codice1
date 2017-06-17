@@ -10,14 +10,14 @@
 
 //TODO unit testing urgente
 
-//template<typename T>
+template<typename T>
 class ValoMatrix : public Matrix {
 public:
 
     ValoMatrix(const int x, const int y) {
         width = x;
         height = y;
-        value = new int[width * height];
+        value = new T[width * height];
         for (int i = 0; i < x; i++)
             for (int j = 0; j < width; j++)
                 value[i + j * height] = 0;
@@ -27,7 +27,7 @@ public:
         delete[] value;
     }
 
-    int const getValue(const int x, const int y) const throw(std::out_of_range) {
+    T const getValue(const int x, const int y) const throw(std::out_of_range) {
         if ((x >= 0) && (x < width) && (y >= 0) && (y < height))
             return value[x + y * height];
         else
@@ -35,10 +35,9 @@ public:
                     "Out Of Range per la selezione degli indici di riga e/o di colonna, La Matrice ha dimensioni diverse"));
     }
 
-    void setValue(const int x, const int y, const int val) throw(std::out_of_range) {
+    void setValue(const int x, const int y, const T val) throw(std::out_of_range) {
         if ((x >= 0) && (x < width) && (y >= 0) && (y < height)) {
             value[x + y * height] = val;
-            std::cout << "imposato valore " << val << " in x " << x << " y " << y << std::endl;
         } else
             throw (std::out_of_range(
                     "Out Of Range per la selezione degli indici di riga e/o di colonna, la Matrice ha dimensioni diverse"));
@@ -82,7 +81,7 @@ public:
         if (this->value) {
             for (int i = 0; i < this->width; i++)
                 for (int j = i; j < this->height; j++) {
-                    int tempor = this->getValue(i, j);
+                    T tempor = this->getValue(i, j);
                     this->setValue(i, j, this->getValue(j, i));
                     this->setValue(j, i, tempor);
                 }
@@ -108,7 +107,7 @@ public:
         if (this->height == rh.width) {
             for (int i = 0; i < this->width; i++) {
                 for (int j = 0; j < rh.height; j++) {
-                    int tempor = 0;
+                    T tempor = 0;
                     for (int k = 0; k < this->height; k++) {
                         tempor += this->getValue(i, k) * rh.getValue(k, j);
                         temp.setValue(i, j, tempor);

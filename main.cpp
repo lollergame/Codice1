@@ -69,9 +69,12 @@ int main() {
         A.trasp();
         A.printMatrix();
 
-        cout << "Orlata 1x1 di A" << endl;
-        A.underScale(5, 5);
+        cout << "Orlata 4x4 di A" << endl;
+        A.underScale(4, 4);
         A.printMatrix();
+
+        cout << "Autoassegno A" << endl;
+        A = A;
 
         cout << "Orlata 10x10 di A" << endl;
         A.underScale(10, 10);
@@ -83,5 +86,9 @@ int main() {
     catch (std::out_of_range &e) {
         cerr << e.what() << endl;
         return 42;
+    }
+    catch (std::logic_error &e) {
+        cerr << e.what() << endl;
+        return 101;
     }
 }

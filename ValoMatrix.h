@@ -6,6 +6,7 @@
 #define EXAMDIPRO_VALOMATRIX_H
 
 #include <stdexcept>
+#include <stdio.h>
 
 #include "Matrix.h"
 
@@ -39,7 +40,6 @@ public:
     void setValue(const int x, const int y, const int val) throw(std::out_of_range) {
         if ((x >= 0) && (y >= 0) && (x < width) && (y < height)) {
             value[x + y * width] = val;
-            std::cout << "posizione x " << x << " y " << y << " valore " << val << std::endl;
         } else
             throw (std::out_of_range(
                     "Out Of Range per la selezione degli indici di riga e/o di colonna, la Matrice ha dimensioni diverse"));
@@ -94,7 +94,9 @@ public:
                     for (int j = y; j < this->height; ++j)
                         this->setValue(i, j, 0);
                 return *this;
-            } else throw (std::out_of_range("Fuori Range"));
+            } else
+                throw (std::out_of_range(
+                        "I valori inseriti vanno oltre la dimensione della Matrice, impossibile genereare Matrice orlata!"));
         } else throw (std::out_of_range("La Matrice e' gia alla dimensione minima! Impossibile scalare di dimensione"));
     }
 
@@ -129,15 +131,15 @@ public:
                     "La Matrice non e' conformabile!! La dimensione delle righe e delle colonne delle due Matrici deve esere uguale!! "));
     }
 
-    ValoMatrix &operator=(const ValoMatrix &rh) {
+    ValoMatrix &operator=(const ValoMatrix &rh) throw(std::logic_error) {
         if (this != &rh) {
             this->width = rh.width;
             this->height = rh.height;
             for (int i = 0; i < this->width; i++)
                 for (int j = 0; j < this->height; j++)
                     this->setValue(i, j, rh.getValue(i, j));
-        }
-        return *this;
+            return *this;
+        } else throw (std::logic_error("Impossibile utilizzare la stessa Matrice"));
     }
 
     int getWidth() const {
@@ -147,6 +149,7 @@ public:
     int getHeight() const {
         return height;
     }
+
 private:
     int *value;
 };

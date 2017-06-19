@@ -9,9 +9,9 @@ int main() {
     try {
 
         MatrixDesigner<int> *mtp = new MatrixStyle<int>();
-        mtp->choiceMatrixType(5, 5);
+        Matrix<int> *matrixxx = mtp->choiceMatrixType(5, 5);
         cout << "lel" << endl;
-        mtp->printMatrix();
+        matrixxx->printMatrix();
 
 
     }

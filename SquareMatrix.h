@@ -26,7 +26,7 @@ public:
     }
 
     virtual T getValue(int x) {
-        Matrix::getValue(x, x);
+        Matrix<T>::getValue(x, x);
     }
 };
 

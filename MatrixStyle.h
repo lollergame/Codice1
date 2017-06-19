@@ -6,7 +6,6 @@
 #define EXAMDIPRO_MATRIXSTYLE_H
 
 
-#include "MatrixDesigner.h"
 #include "SquareMatrix.h"
 
 template<typename T>

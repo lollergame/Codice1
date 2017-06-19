@@ -12,7 +12,7 @@ using namespace std;
 
 template<typename T>
 class Matrix {
-public:
+protected:
     Matrix() {
         width = 1;
         height = 1;
@@ -20,15 +20,7 @@ public:
         value[width + height * width] = 0;
     }
 
-    Matrix(int x, int y) {
-        width = x;
-        height = y;
-        value = new T[width * height];
-        for (int i = 0; i < width; i++)
-            for (int j = 0; j < height; j++)
-                value[i + j * width] = 0;
-    }
-
+public:
     virtual ~Matrix() {
         if (value)
         delete[] value;
@@ -42,7 +34,7 @@ public:
                     "Out Of Range per la selezione degli indici di riga e/o di colonna, La Matrice ha dimensioni diverse"));
     }
 
-/*
+
     virtual void setValue(const int x, const int y, const int val) throw(std::out_of_range) {
         if ((x >= 0) && (y >= 0) && (x < width) && (y < height)) {
             value[x + y * width] = val;
@@ -50,7 +42,7 @@ public:
             throw (std::out_of_range(
                     "Out Of Range per la selezione degli indici di riga e/o di colonna, la Matrice ha dimensioni diverse"));
     }
-*/
+
     virtual void printMatrix() const {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++)
@@ -59,7 +51,7 @@ public:
         }
     }
 
-/** Matrix prendiRiga(const int x) const throw(std::out_of_range) {
+    Matrix prendiRiga(const int x) const throw(std::out_of_range) {
     Matrix temp(1, this->width);
     if (x >= 0 && x < this->width) {
         for (int i = 0; i < this->width; i++) {
@@ -163,8 +155,17 @@ Matrix prendiColonna(const int y) const throw(std::out_of_range) {
     void setHeight(int height) {
         this->height = height;
     }
-*/
-private:
+
+    Matrix(int x, int y) {
+        width = x;
+        height = y;
+        value = new T[width * height];
+        for (int i = 0; i < width; i++)
+            for (int j = 0; j < height; j++)
+                value[i + j * width] = 0;
+    }
+
+protected:
     int width, height;
     int *value;
 };

@@ -19,9 +19,9 @@ public:
             return new SquareMatrix<T>(x);
         else if (x == 1 && y > 0)
             return new RowVector<T>(1, y);
-            else if ( x >= 0 && y == 1)
+        else if (x > 0 && y == 1)
             return new ColVector<T>(x, 1);
-            else if ( x >= 0 && y >= 0 && x != y)
+        else if (x > 0 && y > 0 && x != y)
                 return new RectangleMatrix<T>(x,y);
         else return 0;
     }

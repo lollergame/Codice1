@@ -15,7 +15,6 @@ public:
     Matrix<T> *choiceMatrixType(int x, int y) const {
         Matrix<T> *matrix;
         matrix = createMatrix(x, y);
-        matrix->printMatrix();
         return matrix;
     }
 

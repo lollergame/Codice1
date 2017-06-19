@@ -24,5 +24,4 @@ protected:
     MatrixDesigner() {}
 };
 
-
 #endif //EXAMDIPRO_MATRIXDESIGNER_H

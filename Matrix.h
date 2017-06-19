@@ -12,7 +12,7 @@ using namespace std;
 
 template<typename T>
 class Matrix {
-public:
+protected:
     Matrix() {
         width = 1;
         height = 1;
@@ -29,6 +29,7 @@ public:
                 value[i + j * width] = 0;
     }
 
+public:
     virtual ~Matrix() {
         if (value)
             delete[] value;

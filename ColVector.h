@@ -12,9 +12,16 @@ class ColVector : public Matrix<T> {
 public:
     ColVector() {}
 
-    ColVector(int x, int y) : Matrix<T>(x, 1) {}
+    ColVector(int x, int y) : Matrix<T>(x, 1) {
+        this->setType("Column Vector");
+    }
 
     virtual ~ColVector() {}
+
+    virtual void whoAmI() const override {
+        Matrix<T>::whoAmI();
+        cout << this->getType() << endl;
+    }
 };
 
 

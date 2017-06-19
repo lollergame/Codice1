@@ -10,6 +10,7 @@
 #include "RowVector.h"
 #include "ColVector.h"
 #include "RectangleMatrix.h"
+#include "MatrixDesigner.h"
 
 template<typename T>
 class MatrixStyle : public MatrixDesigner<T> {

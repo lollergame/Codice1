@@ -13,9 +13,9 @@ public:
     virtual ~MatrixDesigner() {}
 
     Matrix<T> *choiceMatrixType(int x, int y) const {
-        Matrix<T> *matrix;
-        matrix = createMatrix(x, y);
-        return matrix;
+        Matrix<T> *mtx;
+        mtx = createMatrix(x, y);
+        return mtx;
     }
 
     virtual Matrix<T> *createMatrix(int x, int y) const = 0;

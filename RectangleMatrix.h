@@ -12,10 +12,16 @@ class RectangleMatrix : public Matrix<T> {
 public:
     RectangleMatrix() {}
 
-    RectangleMatrix(int x, int y) : Matrix<T>(x, y) {}
+    RectangleMatrix(int x, int y) : Matrix<T>(x, y) {
+        this->setType("Rectangle Matrix");
+    }
 
     virtual ~RectangleMatrix() {}
 
+    virtual void whoAmI() const override {
+        Matrix<T>::whoAmI();
+        cout << this->getType() << endl;
+    }
 };
 
 

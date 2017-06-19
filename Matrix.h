@@ -113,30 +113,30 @@ public:
         cout << "I'm a " << width << " x " << height << " : ";
     }
 
-    virtual Matrix operator*(const Matrix &rh) throw(std::out_of_range) {
-        Matrix temp(this->width, rh.height);
-        if (this->height == rh.width) {
+    virtual Matrix operator*(const Matrix *rh) const throw(std::out_of_range) {
+        Matrix *temp = new Matrix<T>(this->width, rh->height);
+        if (this->height == rh->width) {
             for (int i = 1; i <= this->width; i++) {
-                for (int j = 1; j <= rh.height; j++) {
+                for (int j = 1; j <= rh->height; j++) {
                     T tempor = 0;
                     for (int k = 1; k <= this->height; k++) {
-                        tempor += this->getValue(i, k) * rh.getValue(k, j);
-                        temp.setValue(i, j, tempor);
+                        tempor += this->getValue(i, k) * rh->getValue(k, j);
+                        temp->setValue(i, j, tempor);
                     }
                 }
             }
-            return temp;
+            return *temp;
         } else
             throw (std::out_of_range(
                     "La Matrice non e' conformabile! La dimensione delle righe della prima Matrice e delle colonne della seconda devono essere uguali!!"));
     }
 
-    virtual Matrix operator+(const Matrix &rh) const throw(std::out_of_range) {
-        Matrix temp(rh.width, rh.height);
-        if ((this->width == rh.width) && (this->height == rh.height)) {
+    virtual Matrix operator+(const Matrix *rh) const throw(std::out_of_range) {
+        Matrix temp(rh->width, rh->height);
+        if ((this->width == rh->width) && (this->height == rh->height)) {
             for (int i = 1; i <= this->width; i++)
                 for (int j = 1; j <= this->height; j++) {
-                    temp.setValue(i, j, (this->getValue(i, j) + rh.getValue(i, j)));
+                    temp.setValue(i, j, (this->getValue(i, j) + rh->getValue(i, j)));
                 }
             return temp;
         } else
@@ -144,13 +144,13 @@ public:
                     "La Matrice non e' conformabile!! La dimensione delle righe e delle colonne delle due Matrici deve esere uguale!! "));
     }
 
-    virtual Matrix &operator=(const Matrix &rh) throw(std::logic_error) {
-        if (this != &rh) {
-            this->width = rh.width;
-            this->height = rh.height;
+    virtual Matrix &operator=(const Matrix *rh) throw(std::logic_error) {
+        if (this != rh) {
+            this->width = rh->width;
+            this->height = rh->height;
             for (int i = 1; i <= this->width; i++)
                 for (int j = 1; j <= this->height; j++)
-                    this->setValue(i, j, rh.getValue(i, j));
+                    this->setValue(i, j, rh->getValue(i, j));
             return *this;
         } else throw (std::logic_error("Impossibile utilizzare la stessa Matrice per l'assegnazione"));
     }

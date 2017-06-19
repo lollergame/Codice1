@@ -12,13 +12,13 @@ class MatrixDesigner {
 public:
     virtual ~MatrixDesigner() {}
 
-    Matrix<T> *choiceMatrixType(int x, int y) const {
+    Matrix<T> *choiceMatrixType(int x, int y) {
         Matrix<T> *mtx;
         mtx = createMatrix(x, y);
         return mtx;
     }
 
-    virtual Matrix<T> *createMatrix(int x, int y) const = 0;
+    virtual Matrix<T> *createMatrix(int x, int y)  = 0;
 
 protected:
     MatrixDesigner() {}

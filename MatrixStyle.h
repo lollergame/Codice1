@@ -15,8 +15,8 @@
 template<typename T>
 class MatrixStyle : public MatrixDesigner<T> {
 public:
-    Matrix<T> *createMatrix(int x, int y) const {
-        if (x == y)
+    Matrix<T> *createMatrix(int x, int y) {
+        if (x == y && x > 0)
             return new SquareMatrix<T>(x);
         else if (x == 1 && y > 0)
             return new RowVector<T>(1, y);

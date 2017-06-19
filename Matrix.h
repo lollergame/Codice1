@@ -31,7 +31,7 @@ public:
 
     virtual ~Matrix() {
         if (value)
-        delete[] value;
+            delete[] value;
     }
 
     virtual T const getValue(const int x, const int y) const throw(std::out_of_range) {
@@ -42,7 +42,6 @@ public:
                     "Out Of Range per la selezione degli indici di riga e/o di colonna, La Matrice ha dimensioni diverse"));
     }
 
-/*
     virtual void setValue(const int x, const int y, const int val) throw(std::out_of_range) {
         if ((x >= 0) && (y >= 0) && (x < width) && (y < height)) {
             value[x + y * width] = val;
@@ -50,7 +49,7 @@ public:
             throw (std::out_of_range(
                     "Out Of Range per la selezione degli indici di riga e/o di colonna, la Matrice ha dimensioni diverse"));
     }
-*/
+
     virtual void printMatrix() const {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++)
@@ -59,34 +58,37 @@ public:
         }
     }
 
-/** Matrix prendiRiga(const int x) const throw(std::out_of_range) {
-    Matrix temp(1, this->width);
-    if (x >= 0 && x < this->width) {
-        for (int i = 0; i < this->width; i++) {
-            temp.setValue(0, i, this->getValue(x, i));
-        }
-        return temp;
-    } else throw (std::out_of_range("Out Of Range con il valore x"));
-}
+    virtual Matrix returnRow(const int x) const throw(std::out_of_range) {
+        Matrix temp(1, this->width);
+        if (x >= 0 && x < this->width) {
+            for (int i = 0; i < this->width; i++) {
+                temp.setValue(0, i, this->getValue(x, i));
+            }
+            return temp;
+        } else throw (std::out_of_range("Out Of Range con il valore x"));
+    }
 
-Matrix prendiColonna(const int y) const throw(std::out_of_range) {
-    Matrix temp(this->height, 1);
-    if (y >= 0 && y < this->height) {
-        for (int i = 0; i < this->height; i++) {
-            temp.setValue(i, 0, this->getValue(i, y));
-        }
-        return temp;
-    } else throw (std::out_of_range("Out Of Range con il valore y"));
-}
+    virtual Matrix returnCol(const int y) const throw(std::out_of_range) {
+        Matrix temp(this->height, 1);
+        if (y >= 0 && y < this->height) {
+            for (int i = 0; i < this->height; i++) {
+                temp.setValue(i, 0, this->getValue(i, y));
+            }
+            return temp;
+        } else throw (std::out_of_range("Out Of Range con il valore y"));
+    }
 
     virtual Matrix &trasp() throw(std::out_of_range) {
         if (this->value) {
+            T tempor;
+            Matrix temp(this->height, this->width);
             for (int i = 0; i < this->width; i++)
                 for (int j = i; j < this->height; j++) {
-                    int tempor = this->getValue(i, j);
-                    this->setValue(i, j, this->getValue(j, i));
-                    this->setValue(j, i, tempor);
+                    tempor = this->getValue(i, j);
+                    temp.setValue(i, j, this->getValue(j, i));
+                    temp.setValue(j, i, tempor);
                 }
+            *this = temp;
             return *this;
         } else throw (std::out_of_range("La Matrice non contiene valori"));
     }
@@ -148,22 +150,22 @@ Matrix prendiColonna(const int y) const throw(std::out_of_range) {
         } else throw (std::logic_error("Impossibile utilizzare la stessa Matrice per l'assegnazione"));
     }
 
-    int getWidth() const {
+    virtual int getWidth() const {
         return width;
     }
 
-    int getHeight() const {
+    virtual int getHeight() const {
         return height;
     }
 
-    void setWidth(int width) {
+    virtual void setWidth(int width) {
         this->width = width;
     }
 
-    void setHeight(int height) {
+    virtual void setHeight(int height) {
         this->height = height;
     }
-*/
+
 private:
     int width, height;
     int *value;

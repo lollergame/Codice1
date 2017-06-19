@@ -6,7 +6,6 @@
 #define EXAMDIPRO_VALOMATRIX_H
 
 
-#include <stdio.h>
 
 #include "Matrix.h"
 
@@ -15,19 +14,10 @@ class SquareMatrix : public Matrix<T> {
 public:
     SquareMatrix() {}
 
-    SquareMatrix(int x) : Matrix<T>(x, x) {
-        //Matrix <int> (x,x);
-        //this->setWidth(x);
-        //this->setHeight(x);
+    SquareMatrix(int x) : Matrix<T>(x, x) {}
 
-    }
+    virtual ~SquareMatrix() {}
 
-    virtual ~SquareMatrix() {
-    }
-
-    virtual T getValue(int x) {
-        Matrix::getValue(x, x);
-    }
 };
 
 

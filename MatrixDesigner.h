@@ -16,12 +16,7 @@ public:
         Matrix<T> *matrix;
         matrix = createMatrix(x, y);
         matrix->printMatrix();
-        /*..?..*/
         return matrix;
-    }
-
-    T getValue(int x, int y) {
-        getValue(x, y);
     }
 
     virtual Matrix<T> *createMatrix(int x, int y) const = 0;

@@ -12,23 +12,16 @@ class MatrixDesigner {
 public:
     virtual ~MatrixDesigner() {}
 
-    Matrix<T> *choiceMatrixType(int x, int y) const {
-        Matrix<T> *matrix;
-        matrix = createMatrix(x, y);
-        matrix->printMatrix();
-        /*..?..*/
-        return matrix;
+    Matrix<T> *choiceMatrixType(int x, int y) {
+        Matrix<T> *mtx;
+        mtx = createMatrix(x, y);
+        return mtx;
     }
 
-    T getValue(int x, int y) {
-        getValue(x, y);
-    }
-
-    virtual Matrix<T> *createMatrix(int x, int y) const = 0;
+    virtual Matrix<T> *createMatrix(int x, int y)  = 0;
 
 protected:
     MatrixDesigner() {}
 };
-
 
 #endif //EXAMDIPRO_MATRIXDESIGNER_H

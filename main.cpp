@@ -46,7 +46,7 @@ int main() {
         cout << "Matrix5 = matrix3 * matrix 2" << endl;
         MatrixDesigner<int> *mtp5 = new MatrixStyle<int>();
         Matrix<int> *matrix5 = mtp1->choiceMatrixType(1, 1);
-        *matrix5 = matrix3->operator*(matrix2);
+        *matrix5 = (*matrix3) * (*matrix2); //Fixme non funge
         matrix5->printMatrix();
 
     }

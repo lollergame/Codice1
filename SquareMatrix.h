@@ -22,7 +22,7 @@ public:
 
     virtual void whoAmI() const override {
         Matrix<T>::whoAmI();
-        cout << this->getType() << endl;
+        cout << this->getType() << endl << endl;
     }
 };
 

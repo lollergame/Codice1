@@ -151,8 +151,8 @@ public:
             for (int i = 1; i <= this->width; i++)
                 for (int j = 1; j <= this->height; j++)
                     this->setValue(i, j, rh.getValue(i, j));
-            return *this;
-        } else return *this;
+        }
+        return *this;
     }
 
     virtual int getWidth() const {

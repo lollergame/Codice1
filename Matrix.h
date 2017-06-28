@@ -63,7 +63,7 @@ public:
         Matrix temp(1, this->width);
         if (x > 0 && x <= this->width) {
             for (int i = 1; i <= this->width; i++) {
-                temp.setValue(0, i, this->getValue(x, i));
+                temp.setValue(1, i, this->getValue(x, i));
             }
             return temp;
         } else throw (std::out_of_range("Out Of Range con il valore x"));
@@ -73,7 +73,7 @@ public:
         Matrix temp(this->height, 1);
         if (y > 0 && y <= this->height) {
             for (int i = 1; i <= this->height; i++) {
-                temp.setValue(i, 0, this->getValue(i, y));
+                temp.setValue(i, 1, this->getValue(i, y));
             }
             return temp;
         } else throw (std::out_of_range("Out Of Range con il valore y"));
@@ -81,8 +81,8 @@ public:
 
     virtual Matrix &trasp() throw(std::out_of_range) {
         if (this->value) {
-            T tempor;
             Matrix temp(this->height, this->width);
+            T tempor;
             for (int i = 1; i <= this->width; i++)
                 for (int j = i; j <= this->height; j++) {
                     tempor = this->getValue(i, j);

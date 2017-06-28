@@ -48,7 +48,6 @@ int main() {
         Matrix<int> *matrix5 = mtp1->choiceMatrixType(1, 1);
         *matrix5 = (*matrix3) * (*matrix2);
         matrix5->printMatrix();
-
     }
     catch (std::out_of_range &e) {
         cerr << e.what() << endl;

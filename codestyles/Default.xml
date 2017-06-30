@@ -1,4 +1,7 @@
 <code_scheme name="Default">
+  <Objective-C>
+    <option name="INTRODUCE_CONST_VARS" value="true" />
+  </Objective-C>
   <Objective-C-extensions>
     <file>
       <option name="com.jetbrains.cidr.lang.util.OCDeclarationKind" value="Import" />
